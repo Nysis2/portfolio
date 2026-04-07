@@ -1,0 +1,115 @@
+/* Section héro plein écran */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* Fond : image de setup + dégradé sombre */
+.bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('/bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  /* Couche sombre pour lisibilité */
+  filter: brightness(0.25);
+  transform: scale(1.03); /* légère mise à l'échelle pour l'effet parallaxe au scroll */
+  transition: transform 0.1s linear;
+}
+
+/* Dégradé supplémentaire par-dessus le fond */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 10, 10, 0.2) 0%,
+    rgba(10, 10, 10, 0.6) 100%
+  );
+  pointer-events: none;
+}
+
+/* Contenu au-dessus du fond */
+.content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  max-width: 680px;
+  padding: 0 24px;
+  animation: fadeUp 0.8s ease both;
+}
+
+/* Badge "Développeur" */
+.badge {
+  display: inline-block;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+  padding: 5px 14px;
+  border-radius: 999px;
+}
+
+/* Nom principal */
+.name {
+  font-size: clamp(2.8rem, 7vw, 5rem);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--color-accent);
+}
+
+/* Phrase d'accroche */
+.tagline {
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  max-width: 520px;
+}
+
+/* Bouton CTA */
+.cta {
+  margin-top: 8px;
+  padding: 12px 32px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  font-size: 0.9rem;
+  color: var(--color-text);
+  letter-spacing: 0.04em;
+  transition: background var(--transition), border-color var(--transition);
+}
+
+.cta:hover {
+  background: var(--color-surface-hover);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+/* Animation d'entrée */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 640px) {
+  .content {
+    gap: 18px;
+  }
+}
