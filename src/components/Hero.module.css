@@ -20,8 +20,7 @@
 
   /* Couche sombre pour lisibilité */
   filter: brightness(0.25);
-  transform: scale(1.03); /* légère mise à l'échelle pour l'effet parallaxe au scroll */
-  transition: transform 0.1s linear;
+  animation: kenBurns 20s ease-in-out infinite alternate;
 }
 
 /* Dégradé supplémentaire par-dessus le fond */
@@ -30,12 +29,14 @@
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    to bottom,
-    rgba(10, 10, 10, 0.2) 0%,
-    rgba(10, 10, 10, 0.6) 100%
+    170deg,
+    rgba(10, 10, 10, 0.05) 0%,
+    rgba(10, 10, 10, 0.45) 55%,
+    rgba(10, 10, 10, 0.9) 100%
   );
   pointer-events: none;
 }
+
 
 /* Contenu au-dessus du fond */
 .content {
@@ -56,10 +57,11 @@
   font-size: 0.78rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--color-text-muted);
-  border: 1px solid var(--color-border);
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary-border);
   padding: 5px 14px;
   border-radius: 999px;
+  background: var(--color-primary-dim);
 }
 
 /* Nom principal */
@@ -68,7 +70,10 @@
   font-weight: 300;
   letter-spacing: -0.02em;
   line-height: 1.1;
-  color: var(--color-accent);
+  background: linear-gradient(135deg, #ffffff 30%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 /* Phrase d'accroche */
@@ -83,17 +88,19 @@
 .cta {
   margin-top: 8px;
   padding: 12px 32px;
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  border: 1px solid var(--color-primary-border);
   border-radius: 999px;
   font-size: 0.9rem;
-  color: var(--color-text);
+  color: var(--color-primary);
   letter-spacing: 0.04em;
-  transition: background var(--transition), border-color var(--transition);
+  background: var(--color-primary-dim);
+  transition: background var(--transition), border-color var(--transition), box-shadow var(--transition);
 }
 
 .cta:hover {
-  background: var(--color-surface-hover);
-  border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(99, 102, 241, 0.28);
+  border-color: rgba(129, 140, 248, 0.6);
+  box-shadow: 0 0 24px rgba(129, 140, 248, 0.2);
 }
 
 /* Animation d'entrée */
@@ -106,6 +113,34 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Ken Burns — zoom lent sur l'image de fond */
+@keyframes kenBurns {
+  from { transform: scale(1);    transform-origin: center center; }
+  to   { transform: scale(1.08); transform-origin: 55% 45%; }
+}
+
+/* Indicateur de scroll animé */
+.scrollIndicator {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  color: var(--color-text-muted);
+  opacity: 0.5;
+  animation: scrollBounce 2.2s ease-in-out infinite, fadeUp 0.8s ease 0.6s both;
+  transition: opacity var(--transition);
+}
+
+.scrollIndicator:hover {
+  opacity: 0.9;
+}
+
+@keyframes scrollBounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(7px); }
 }
 
 @media (max-width: 640px) {

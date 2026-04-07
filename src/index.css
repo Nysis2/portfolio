@@ -7,12 +7,17 @@
 
 :root {
   --color-bg: #0a0a0a;
+  --color-bg-alt: #111111;
   --color-surface: rgba(255, 255, 255, 0.05);
   --color-surface-hover: rgba(255, 255, 255, 0.09);
   --color-border: rgba(255, 255, 255, 0.1);
   --color-text: #e8e8e8;
   --color-text-muted: #777;
   --color-accent: #ffffff;
+  --color-primary: #818cf8;
+  --color-primary-dim: rgba(99, 102, 241, 0.18);
+  --color-primary-border: rgba(129, 140, 248, 0.35);
+  --gradient-accent: linear-gradient(135deg, #818cf8 0%, #a78bfa 100%);
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --transition: 0.3s ease;
   --radius: 14px;
@@ -43,4 +48,16 @@ a {
 img {
   max-width: 100%;
   display: block;
+}
+
+/* ── Scroll reveal ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
 }
