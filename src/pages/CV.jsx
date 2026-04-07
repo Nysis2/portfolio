@@ -1,20 +1,33 @@
 import './CV.css'
 
+async function downloadPDF() {
+  const html2pdf = (await import('html2pdf.js')).default
+  const element = document.getElementById('cv-content')
+  html2pdf(element, {
+    margin:      [10, 10, 10, 10],
+    filename:    'CV_Nicolas_Pandraud.pdf',
+    image:       { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2, useCORS: true },
+    jsPDF:       { unit: 'mm', format: 'a4', orientation: 'portrait' },
+    pagebreak:   { mode: 'avoid-all' },
+  })
+}
+
 export default function CV() {
   return (
     <div className="cv-wrap">
 
       {/* Bouton téléchargement fixe */}
-      <a href="/cv.pdf" download="CV_Nicolas_Pandraud.pdf" className="cv-download">
+      <button onClick={downloadPDF} className="cv-download">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
           <polyline points="7 10 12 15 17 10"/>
           <line x1="12" y1="15" x2="12" y2="3"/>
         </svg>
         Télécharger le CV
-      </a>
+      </button>
 
-      <div className="cv-page">
+      <div className="cv-page" id="cv-content">
 
         {/* Header */}
         <header className="cv-header">
