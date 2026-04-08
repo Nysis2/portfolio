@@ -310,7 +310,33 @@
 
 /* ── Print ── */
 @media print {
-  .cv-wrap { background: white; padding: 0; }
-  .cv-page { box-shadow: none; border-radius: 0; }
-  .cv-download { display: none; }
+  /* margin: 0 supprime les en-têtes/pieds Chrome sans plugin */
+  @page { size: A4 portrait; margin: 0; }
+
+  body { background: white !important; }
+
+  .cv-wrap {
+    background: white !important;
+    padding: 0 !important;
+  }
+
+  .cv-download { display: none !important; }
+
+  .cv-page {
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    font-size: 88%;
+  }
+
+  /* Réduction du padding pour tenir sur une page */
+  .cv-header    { padding: 14px 36px 12px !important; }
+  .cv-sidebar   { padding: 18px 18px !important; }
+  .cv-main      { padding: 18px 28px !important; }
+  .cv-profil    { margin-bottom: 16px !important; padding-bottom: 14px !important; }
+  .cv-exp       { margin-bottom: 14px !important; }
+  .cv-name      { font-size: 1.8rem !important; }
+  .cv-sidebar-section { margin-bottom: 18px !important; }
+  .cv-skill-group { margin-bottom: 10px !important; }
 }

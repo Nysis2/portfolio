@@ -14,7 +14,7 @@ const projects = [
   },
   {
     id: 'notion-films',
-    title: 'Notion Films',
+    title: 'Films en salle',
     description:
       'Pipeline automatisé qui synchronise les films actuellement en salle en France (TMDb) vers une base Notion, avec une interface web mise à jour chaque jour via GitHub Actions.',
     tags: ['Python', 'Notion API', 'TMDb API', 'GitHub Actions', 'Netlify'],
