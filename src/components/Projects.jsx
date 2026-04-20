@@ -1,7 +1,7 @@
 import { useReveal } from '../hooks/useReveal'
 import styles from './Projects.module.css'
 
-/* Liste des projets — ajouter de nouveaux objets ici au fil du temps */
+/* Liste des projets */
 const projects = [
   {
     id: 'mystria',
@@ -88,7 +88,7 @@ export default function Projects() {
 
           {/* Carte placeholder */}
           <li className={`${styles.card} ${styles.cardPlaceholder}`}>
-            <span className={styles.placeholderLabel}>Bientôt…</span>
+            <span className={styles.placeholderLabel}>Bientôt...</span>
           </li>
         </ul>
       </div>

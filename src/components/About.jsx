@@ -30,7 +30,7 @@ export default function About() {
             <p>
               Freelance IT depuis 2023, spécialisé en architecture cloud AWS
               et développement fullstack. J'interviens de l'infrastructure au
-              code — du CDK AWS au frontend Angular — pour accélérer la mise
+              code, du CDK AWS au frontend Angular, pour accélérer la mise
               en production et fiabiliser les systèmes.
             </p>
             <p>

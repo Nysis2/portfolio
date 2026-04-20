@@ -4,7 +4,7 @@ import './CV.css'
 export default function CV() {
   useEffect(() => {
     const prev = document.title
-    document.title = 'Nicolas Pandraud — DevOps AWS & Lead Fullstack'
+    document.title = 'Nicolas Pandraud - DevOps AWS & Lead Fullstack'
     return () => { document.title = prev }
   }, [])
 
@@ -131,7 +131,7 @@ export default function CV() {
               <div className="cv-exp">
                 <div className="cv-exp-header">
                   <div className="cv-exp-title">DevOps AWS & Lead Développeur</div>
-                  <div className="cv-exp-period">2023 – 2025</div>
+                  <div className="cv-exp-period">2023 - 2025</div>
                 </div>
                 <div className="cv-exp-company">
                   STEF IT <span className="cv-exp-via">via</span> VICINITY
@@ -154,7 +154,7 @@ export default function CV() {
               <div className="cv-exp">
                 <div className="cv-exp-header">
                   <div className="cv-exp-title">DevOps AWS & Développeur Full Stack</div>
-                  <div className="cv-exp-period">2022 – 2023</div>
+                  <div className="cv-exp-period">2022 - 2023</div>
                 </div>
                 <div className="cv-exp-company">
                   SERFIM <span className="cv-exp-via">via</span> ACENSI
@@ -175,7 +175,7 @@ export default function CV() {
               <div className="cv-exp">
                 <div className="cv-exp-header">
                   <div className="cv-exp-title">DevOps AWS & Développeur Full Stack</div>
-                  <div className="cv-exp-period">2021 – 2022</div>
+                  <div className="cv-exp-period">2021 - 2022</div>
                 </div>
                 <div className="cv-exp-company">
                   RISKEE / OLINO
@@ -201,12 +201,12 @@ export default function CV() {
                 <div>
                   <div className="cv-edu-degree">Master of Science</div>
                   <div className="cv-edu-school">Epitech</div>
-                  <div className="cv-edu-year">2019 – 2022 · Alternance</div>
+                  <div className="cv-edu-year">2019 - 2022 · Alternance</div>
                 </div>
                 <div>
                   <div className="cv-edu-degree">DUT Informatique</div>
                   <div className="cv-edu-school">IUT2 Grenoble</div>
-                  <div className="cv-edu-year">2017 – 2019</div>
+                  <div className="cv-edu-year">2017 - 2019</div>
                 </div>
               </div>
             </section>

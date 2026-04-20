@@ -12,7 +12,7 @@ export default function Hero() {
         <h1 className={styles.name}>Nicolas Pandraud</h1>
         <p className={styles.tagline}>
           J'architecte des infrastructures cloud AWS et développe des applications<br />
-          fullstack — de l'IoT au frontend — pour des équipes techniques exigeantes.
+          fullstack, de l'IoT au frontend, pour des équipes techniques exigeantes.
         </p>
 
         {/* Call to action */}

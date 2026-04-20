@@ -115,7 +115,7 @@
   }
 }
 
-/* Ken Burns — zoom lent sur l'image de fond */
+/* Ken Burns : zoom lent sur l'image de fond */
 @keyframes kenBurns {
   from { transform: scale(1);    transform-origin: center center; }
   to   { transform: scale(1.08); transform-origin: 55% 45%; }
