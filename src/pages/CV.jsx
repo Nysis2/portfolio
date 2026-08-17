@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import './CV.css'
+import { CREDLY_URL, CERT_NAME, CERT_BADGE } from '../data/certification'
 
 export default function CV() {
   useEffect(() => {
@@ -11,15 +12,15 @@ export default function CV() {
   return (
     <div className="cv-wrap">
 
-      {/* Bouton téléchargement fixe */}
-      <a href="/cv.pdf" download="CV_Nicolas_Pandraud.pdf" className="cv-download">
+      {/* Bouton téléchargement : impression native -> Enregistrer en PDF (A4, toujours à jour) */}
+      <button type="button" onClick={() => window.print()} className="cv-download">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
           <polyline points="7 10 12 15 17 10"/>
           <line x1="12" y1="15" x2="12" y2="3"/>
         </svg>
         Télécharger le CV
-      </a>
+      </button>
 
       <div className="cv-page" id="cv-content">
 
@@ -27,7 +28,7 @@ export default function CV() {
         <header className="cv-header">
           <div>
             <h1 className="cv-name">Nicolas <span>Pandraud</span></h1>
-            <div className="cv-title">DevOps AWS · Lead Développeur Fullstack</div>
+            <div className="cv-title">DevOps spécialisé AWS · Lead Développeur Fullstack</div>
           </div>
           <div className="cv-contact">
             <span>Lyon, France · Remote</span>
@@ -44,12 +45,21 @@ export default function CV() {
           <aside className="cv-sidebar">
 
             <div className="cv-sidebar-section">
+              <div className="cv-sidebar-title">Certification</div>
+              <a className="cv-cert" href={CREDLY_URL} target="_blank" rel="noopener noreferrer">
+                <img className="cv-cert-logo" src={CERT_BADGE} alt={CERT_NAME} width="82" height="82" />
+                <div className="cv-cert-name">AWS Certified Solutions Architect</div>
+                <div className="cv-cert-meta">Associate · Amazon Web Services · 2026</div>
+              </a>
+            </div>
+
+            <div className="cv-sidebar-section">
               <div className="cv-sidebar-title">Compétences</div>
 
               <div className="cv-skill-group">
                 <div className="cv-skill-group-name">Cloud & DevOps</div>
                 <div className="cv-skill-tags">
-                  {['AWS CDK','Lambda','EC2 / S3','DynamoDB','RDS','SQS / SNS','IoT Core','LoRaWAN','Cognito','GitLab CI/CD','Jenkins','Docker','Prometheus','Grafana'].map(s => (
+                  {['AWS CDK','Lambda','EC2 / S3','DynamoDB','RDS','SQS / SNS','IoT Core','Cognito','GitLab CI/CD','Docker'].map(s => (
                     <span key={s} className="cv-skill-tag">{s}</span>
                   ))}
                 </div>
@@ -85,7 +95,7 @@ export default function CV() {
               <div className="cv-skill-group">
                 <div className="cv-skill-group-name">Méthodes</div>
                 <div className="cv-skill-tags">
-                  {['Scrum / Agile','Lead tech','Coaching'].map(s => (
+                  {['Scrum / Agile','Lead tech'].map(s => (
                     <span key={s} className="cv-skill-tag">{s}</span>
                   ))}
                 </div>

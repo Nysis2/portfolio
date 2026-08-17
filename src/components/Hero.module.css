@@ -51,6 +51,47 @@
   animation: fadeUp 0.8s ease both;
 }
 
+/* Badge de certification AWS officiel */
+.certBadge {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  transition: transform var(--transition);
+}
+
+.certBadge:hover {
+  transform: translateY(-4px);
+}
+
+.certBadge img {
+  width: 132px;
+  height: 132px;
+  filter: drop-shadow(0 8px 28px rgba(129, 140, 248, 0.45));
+  animation: badgeFloat 5s ease-in-out infinite;
+}
+
+.certVerified {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #34d399;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(52, 211, 153, 0.12);
+  border: 1px solid rgba(52, 211, 153, 0.35);
+}
+
+@keyframes badgeFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+
 /* Badge "Développeur" */
 .badge {
   display: inline-block;
@@ -81,7 +122,12 @@
   font-size: clamp(0.95rem, 2vw, 1.1rem);
   color: var(--color-text-muted);
   line-height: 1.7;
-  max-width: 520px;
+  max-width: 560px;
+}
+
+.tagline strong {
+  color: var(--color-text);
+  font-weight: 600;
 }
 
 /* Bouton CTA */
@@ -146,5 +192,20 @@
 @media (max-width: 640px) {
   .content {
     gap: 18px;
+    padding: 0 20px;
+  }
+
+  .certBadge img {
+    width: 108px;
+    height: 108px;
+  }
+
+  .cta {
+    width: 100%;
+    text-align: center;
+  }
+
+  .scrollIndicator {
+    bottom: 24px;
   }
 }

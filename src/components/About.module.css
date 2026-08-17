@@ -42,6 +42,50 @@
   line-height: 1.8;
 }
 
+/* Certification */
+.cert {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 8px;
+  padding: 12px 16px;
+  border: 1px solid var(--color-primary-border);
+  border-radius: 12px;
+  background: var(--color-primary-dim);
+  text-decoration: none;
+  transition: border-color var(--transition), background var(--transition), transform var(--transition);
+}
+
+.cert:hover {
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.certBadge {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+}
+
+.certText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.certText strong {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text);
+  letter-spacing: -0.01em;
+}
+
+.certMeta {
+  font-size: 0.78rem;
+  color: var(--color-primary);
+}
+
 /* Grille de technologies */
 .stack {
   list-style: none;

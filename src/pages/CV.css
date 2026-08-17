@@ -170,6 +170,45 @@
   color: #5a5a6e;
 }
 
+/* ── Certification (sidebar) ── */
+.cv-cert {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+  padding: 16px 12px;
+  border-radius: 8px;
+  background: rgba(99,102,241,0.06);
+  border: 1px solid rgba(99,102,241,0.15);
+  text-decoration: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.cv-cert:hover {
+  border-color: rgba(99,102,241,0.35);
+  background: rgba(99,102,241,0.1);
+}
+
+.cv-cert-logo {
+  width: 82px;
+  height: 82px;
+  object-fit: contain;
+}
+
+.cv-cert-name {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #0f0f12;
+  line-height: 1.35;
+}
+
+.cv-cert-meta {
+  font-size: 0.68rem;
+  color: #5a5a6e;
+  line-height: 1.4;
+}
+
 .cv-lang-item {
   display: flex;
   justify-content: space-between;
@@ -308,10 +347,127 @@
   margin-top: 2px;
 }
 
+/* ── Responsive mobile ── */
+@media (max-width: 700px) {
+  .cv-wrap {
+    padding: 12px 10px 88px; /* espace pour la barre de téléchargement en bas */
+    background: #e8eaf6;
+  }
+
+  /* Bouton télécharger : barre fixe en bas */
+  .cv-download {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    border-radius: 0;
+    justify-content: center;
+    padding: 16px 24px;
+    font-size: 0.9rem;
+    box-shadow: 0 -4px 24px rgba(99,102,241,0.25);
+  }
+
+  /* Page blanche sans ombre excessive */
+  .cv-page {
+    border-radius: 8px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+  }
+
+  /* ── Header mobile ── */
+  .cv-header {
+    padding: 24px 20px 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+  }
+
+  .cv-name {
+    font-size: 1.65rem;
+    letter-spacing: -0.02em;
+  }
+
+  .cv-title {
+    font-size: 0.78rem;
+    margin-top: 6px;
+    letter-spacing: 0.02em;
+    flex-wrap: wrap;
+  }
+
+  /* Contacts en grille 2 colonnes sous le nom */
+  .cv-contact {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    width: 100%;
+  }
+
+  .cv-contact a,
+  .cv-contact span {
+    font-size: 0.73rem;
+    color: #c8c8e0;
+    overflow-wrap: break-word;
+  }
+
+  /* ── Body ── */
+  .cv-body {
+    grid-template-columns: 1fr;
+  }
+
+  .cv-sidebar {
+    border-right: none;
+    border-bottom: 1px solid #e4e4f0;
+    padding: 20px 18px;
+  }
+
+  /* Compétences en grille 2 colonnes sur mobile */
+  .cv-skill-tags {
+    gap: 4px;
+  }
+
+  .cv-skill-tag {
+    font-size: 0.68rem;
+    padding: 2px 7px;
+  }
+
+  .cv-main {
+    padding: 20px 18px;
+  }
+
+  .cv-edu-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .cv-exp-header {
+    flex-direction: row;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px 8px;
+  }
+
+  .cv-exp-period {
+    font-size: 0.7rem;
+  }
+}
+
 /* ── Print ── */
 @media print {
   /* margin: 0 supprime les en-têtes/pieds Chrome sans plugin */
   @page { size: A4 portrait; margin: 0; }
+
+  /* Force l'impression des fonds/couleurs : sans ça, Chrome imprime le header
+     noir en blanc et le texte blanc devient invisible (case "Graphismes
+     d'arriere-plan" decochee par defaut). */
+  .cv-wrap,
+  .cv-wrap * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
 
   body { background: white !important; }
 
@@ -327,16 +483,46 @@
     border-radius: 0 !important;
     max-width: 100% !important;
     width: 100% !important;
-    font-size: 88%;
+    /* overflow:hidden couperait le contenu debordant sur une 2e page */
+    overflow: visible !important;
+    font-size: 86%;
   }
+
+  /* Ne pas couper une experience ou un bloc sidebar en deux pages */
+  .cv-exp,
+  .cv-sidebar-section,
+  .cv-skill-group,
+  .cv-edu-grid > div { break-inside: avoid; page-break-inside: avoid; }
 
   /* Réduction du padding pour tenir sur une page */
   .cv-header    { padding: 14px 36px 12px !important; }
-  .cv-sidebar   { padding: 18px 18px !important; }
-  .cv-main      { padding: 18px 28px !important; }
-  .cv-profil    { margin-bottom: 16px !important; padding-bottom: 14px !important; }
-  .cv-exp       { margin-bottom: 14px !important; }
+  .cv-sidebar   { padding: 16px 16px !important; }
+  .cv-main      { padding: 16px 26px !important; }
+  .cv-profil    { margin-bottom: 10px !important; padding-bottom: 8px !important; }
+  .cv-exp       { margin-bottom: 9px !important; }
+  .cv-exp-desc  { margin-bottom: 8px !important; }
   .cv-name      { font-size: 1.8rem !important; }
-  .cv-sidebar-section { margin-bottom: 18px !important; }
-  .cv-skill-group { margin-bottom: 10px !important; }
+
+  /* Le degrade en background-clip:text peut ne rien rendre a l'impression :
+     on repasse le nom en couleur pleine. */
+  .cv-name span {
+    background: none !important;
+    -webkit-background-clip: initial !important;
+    background-clip: initial !important;
+    -webkit-text-fill-color: #a78bfa !important;
+    color: #a78bfa !important;
+  }
+  .cv-sidebar-section { margin-bottom: 10px !important; }
+  .cv-sidebar-title { margin-bottom: 8px !important; padding-bottom: 4px !important; }
+  .cv-sidebar p { line-height: 1.5 !important; }
+  .cv-skill-group { margin-bottom: 6px !important; }
+  .cv-skill-tag { padding: 1px 7px !important; }
+  .cv-lang-item { margin-bottom: 5px !important; }
+
+  /* Certification compacte à l'impression */
+  .cv-cert       { padding: 8px !important; gap: 4px !important; }
+  .cv-cert-logo  { width: 54px !important; height: 54px !important; }
+
+  /* Réduit la grosse marge inline de la section Formation */
+  .cv-main section[style] { margin-top: 8px !important; }
 }

@@ -1,5 +1,6 @@
 import { useReveal } from '../hooks/useReveal'
 import styles from './About.module.css'
+import { CREDLY_URL, CERT_NAME, CERT_BADGE } from '../data/certification'
 
 const stack = [
   'AWS', 'CDK', 'Lambda', 'Angular', 'TypeScript',
@@ -38,6 +39,19 @@ export default function About() {
               en contexte Agile. Ouvert à des missions freelance ou un poste en CDI,
               à Lyon ou en remote.
             </p>
+
+            <a
+              className={styles.cert}
+              href={CREDLY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img className={styles.certBadge} src={CERT_BADGE} alt={CERT_NAME} width="56" height="56" loading="lazy" />
+              <span className={styles.certText}>
+                <strong>Certified Solutions Architect - Associate</strong>
+                <span className={styles.certMeta}>Amazon Web Services · Vérifier le badge ↗</span>
+              </span>
+            </a>
           </div>
 
           <ul className={styles.stack}>
