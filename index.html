@@ -4,7 +4,12 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Bloc remplace par route au build (voir prerender.js) -->
+    <!--seo-->
+    <title>Nicolas Pandraud - DevOps AWS &amp; Lead Fullstack</title>
     <meta name="description" content="Portfolio de Nicolas Pandraud - DevOps AWS &amp; Lead Fullstack" />
+    <!--/seo-->
 
     <!-- Police Inter depuis Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -14,10 +19,15 @@
       rel="stylesheet"
     />
 
-    <title>Nicolas Pandraud - DevOps AWS &amp; Lead Fullstack</title>
+    <!-- Sans JS (certains bots), le contenu revele au scroll doit rester visible -->
+    <noscript>
+      <style>
+        .reveal { opacity: 1 !important; transform: none !important; }
+      </style>
+    </noscript>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root"><!--app-html--></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

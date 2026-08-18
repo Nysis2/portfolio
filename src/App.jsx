@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -21,13 +21,15 @@ function Portfolio() {
   )
 }
 
+/**
+ * Arbre de routes sans routeur : le routeur est fourni par l'entree
+ * (BrowserRouter cote client, StaticRouter cote pre-rendu).
+ */
 export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Portfolio />} />
-        <Route path="/cv" element={<CV />} />
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Portfolio />} />
+      <Route path="/cv" element={<CV />} />
+    </Routes>
   )
 }
