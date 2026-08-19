@@ -11,6 +11,7 @@ const projects = [
     tags: ['React', 'TypeScript', 'Node.js', 'Express', 'MongoDB', 'Socket.IO', 'Cloudflare R2', 'Stripe'],
     link: 'https://mystria.fr',
     github: null,
+    preview: '/previews/mystria.jpg',
   },
   {
     id: 'notion-films',
@@ -20,6 +21,7 @@ const projects = [
     tags: ['Python', 'Notion API', 'TMDb API', 'GitHub Actions', 'Netlify'],
     link: 'https://notion-films.netlify.app',
     github: null,
+    preview: '/previews/notion-films.jpg',
   },
 ]
 
@@ -27,6 +29,27 @@ function ProjectCard({ project, index }) {
   const ref = useReveal(index * 100)
   return (
     <li ref={ref} key={project.id} className={`${styles.card} reveal`}>
+      {project.preview && (
+        <a
+          href={project.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.preview}
+          tabIndex={-1}
+          aria-hidden="true"
+        >
+          <img
+            src={project.preview}
+            alt=""
+            width="1000"
+            height="488"
+            loading="lazy"
+            decoding="async"
+            className={styles.previewImg}
+          />
+        </a>
+      )}
+
       <span className={styles.number}>
         {String(index + 1).padStart(2, '0')}
       </span>

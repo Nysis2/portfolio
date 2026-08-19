@@ -59,14 +59,56 @@
   box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4), 0 0 32px rgba(129, 140, 248, 0.08);
 }
 
+/* Aperçu du site : capture cliquable en tête de carte */
+.preview {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--color-border);
+  border-radius: calc(var(--radius) - 6px);
+  background: var(--color-bg);
+}
+
+/* Voile sombre pour garder le numéro et la carte lisibles */
+.preview::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(10,10,10,0.45) 0%, rgba(10,10,10,0.05) 45%, rgba(10,10,10,0.35) 100%);
+  transition: opacity var(--transition);
+}
+
+.card:hover .preview::after {
+  opacity: 0.4;
+}
+
+.previewImg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.5s ease;
+}
+
+.card:hover .previewImg {
+  transform: scale(1.04);
+}
+
 /* Numéro décoratif dans le coin */
 .number {
   position: absolute;
-  top: 24px;
-  right: 28px;
+  top: 44px;
+  right: 46px;
+  z-index: 1;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: rgba(10, 10, 10, 0.55);
+  backdrop-filter: blur(6px);
   font-size: 0.7rem;
   letter-spacing: 0.1em;
-  color: var(--color-text-muted);
+  color: rgba(232, 232, 232, 0.85);
   font-variant-numeric: tabular-nums;
 }
 
