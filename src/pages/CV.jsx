@@ -2,6 +2,26 @@ import { useEffect } from 'react'
 import './CV.css'
 import { CREDLY_URL, CERT_NAME, CERT_BADGE } from '../data/certification'
 
+/* Liste de tags : balisage ul/li pour que les parseurs (ATS, bots) lisent
+   des items separes plutot que des mots colles. */
+function Tags({ items, listClass, itemClass }) {
+  return (
+    <ul className={listClass}>
+      {items.map((s) => (
+        <li key={s} className={itemClass}>{s}</li>
+      ))}
+    </ul>
+  )
+}
+
+const SkillTags = ({ items }) => (
+  <Tags items={items} listClass="cv-skill-tags" itemClass="cv-skill-tag" />
+)
+
+const StackTags = ({ items }) => (
+  <Tags items={items} listClass="cv-stack" itemClass="cv-stack-tag" />
+)
+
 export default function CV() {
   useEffect(() => {
     const prev = document.title
@@ -9,12 +29,14 @@ export default function CV() {
     return () => { document.title = prev }
   }, [])
 
+  // Les {' '} separent les elements inline dans le texte brut ; invisibles
+  // a l'ecran car les conteneurs sont en flex.
   return (
     <div className="cv-wrap">
 
       {/* Bouton téléchargement : impression native -> Enregistrer en PDF (A4, toujours à jour) */}
       <button type="button" onClick={() => window.print()} className="cv-download">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
           <polyline points="7 10 12 15 17 10"/>
           <line x1="12" y1="15" x2="12" y2="3"/>
@@ -22,21 +44,21 @@ export default function CV() {
         Télécharger le CV
       </button>
 
-      <div className="cv-page" id="cv-content">
+      <article className="cv-page" id="cv-content">
 
         {/* Header */}
         <header className="cv-header">
           <div>
             <h1 className="cv-name">Nicolas <span>Pandraud</span></h1>
-            <div className="cv-title">DevOps spécialisé AWS · Lead Développeur Fullstack</div>
+            <p className="cv-title">DevOps spécialisé AWS · Lead Développeur Fullstack</p>
           </div>
-          <div className="cv-contact">
-            <span>Lyon, France · Remote</span>
-            <a href="tel:0641911752">06 41 91 17 52</a>
-            <a href="mailto:npandraud@gmail.com">npandraud@gmail.com</a>
-            <a href="https://linkedin.com/in/nicolas-pandraud" target="_blank" rel="noopener noreferrer">linkedin.com/in/nicolas-pandraud</a>
+          <address className="cv-contact">
+            <span>Lyon, France · Remote</span>{' '}
+            <a href="tel:+33641911752">06 41 91 17 52</a>{' '}
+            <a href="mailto:npandraud@gmail.com">npandraud@gmail.com</a>{' '}
+            <a href="https://linkedin.com/in/nicolas-pandraud" target="_blank" rel="noopener noreferrer">linkedin.com/in/nicolas-pandraud</a>{' '}
             <a href="https://nicolas-pandraud.netlify.app" target="_blank" rel="noopener noreferrer">nicolas-pandraud.netlify.app</a>
-          </div>
+          </address>
         </header>
 
         <div className="cv-body">
@@ -44,80 +66,62 @@ export default function CV() {
           {/* Sidebar */}
           <aside className="cv-sidebar">
 
-            <div className="cv-sidebar-section">
-              <div className="cv-sidebar-title">Certification</div>
+            <section className="cv-sidebar-section">
+              <h2 className="cv-sidebar-title">Certification</h2>
               <a className="cv-cert" href={CREDLY_URL} target="_blank" rel="noopener noreferrer">
                 <img className="cv-cert-logo" src={CERT_BADGE} alt={CERT_NAME} width="82" height="82" />
-                <div className="cv-cert-name">AWS Certified Solutions Architect</div>
+                <div className="cv-cert-name">AWS Certified Solutions Architect</div>{' '}
                 <div className="cv-cert-meta">Associate · Amazon Web Services · 2026</div>
               </a>
-            </div>
+            </section>
 
-            <div className="cv-sidebar-section">
-              <div className="cv-sidebar-title">Compétences</div>
+            <section className="cv-sidebar-section">
+              <h2 className="cv-sidebar-title">Compétences</h2>
 
               <div className="cv-skill-group">
-                <div className="cv-skill-group-name">Cloud & DevOps</div>
-                <div className="cv-skill-tags">
-                  {['AWS CDK','Lambda','EC2 / S3','DynamoDB','RDS','SQS / SNS','IoT Core','Cognito','GitLab CI/CD','Docker'].map(s => (
-                    <span key={s} className="cv-skill-tag">{s}</span>
-                  ))}
-                </div>
+                <h3 className="cv-skill-group-name">Cloud & DevOps</h3>
+                <SkillTags items={['AWS CDK','Lambda','EC2 / S3','DynamoDB','RDS','SQS / SNS','IoT Core','Cognito','GitLab CI/CD','Docker']} />
               </div>
 
               <div className="cv-skill-group">
-                <div className="cv-skill-group-name">Frontend</div>
-                <div className="cv-skill-tags">
-                  {['Angular','TypeScript','Vue.js','React.js'].map(s => (
-                    <span key={s} className="cv-skill-tag">{s}</span>
-                  ))}
-                </div>
+                <h3 className="cv-skill-group-name">Frontend</h3>
+                <SkillTags items={['Angular','TypeScript','Vue.js','React.js']} />
               </div>
 
               <div className="cv-skill-group">
-                <div className="cv-skill-group-name">Backend</div>
-                <div className="cv-skill-tags">
-                  {['Node.js','NestJS','REST API'].map(s => (
-                    <span key={s} className="cv-skill-tag">{s}</span>
-                  ))}
-                </div>
+                <h3 className="cv-skill-group-name">Backend</h3>
+                <SkillTags items={['Node.js','NestJS','REST API']} />
               </div>
 
               <div className="cv-skill-group">
-                <div className="cv-skill-group-name">Bases de données</div>
-                <div className="cv-skill-tags">
-                  {['MongoDB','PostgreSQL','MySQL'].map(s => (
-                    <span key={s} className="cv-skill-tag">{s}</span>
-                  ))}
-                </div>
+                <h3 className="cv-skill-group-name">Bases de données</h3>
+                <SkillTags items={['MongoDB','PostgreSQL','MySQL']} />
               </div>
 
               <div className="cv-skill-group">
-                <div className="cv-skill-group-name">Méthodes</div>
-                <div className="cv-skill-tags">
-                  {['Scrum / Agile','Lead tech'].map(s => (
-                    <span key={s} className="cv-skill-tag">{s}</span>
-                  ))}
-                </div>
+                <h3 className="cv-skill-group-name">Méthodes</h3>
+                <SkillTags items={['Scrum / Agile','Lead tech']} />
               </div>
-            </div>
+            </section>
 
-            <div className="cv-sidebar-section">
-              <div className="cv-sidebar-title">Langues</div>
-              {[['Français','Natif'],['Anglais','Avancé'],['Espagnol','Élémentaire']].map(([lang, lvl]) => (
-                <div key={lang} className="cv-lang-item">
-                  <span className="cv-lang-name">{lang}</span>
-                  <span className="cv-lang-level">{lvl}</span>
-                </div>
-              ))}
-            </div>
+            <section className="cv-sidebar-section">
+              <h2 className="cv-sidebar-title">Langues</h2>
+              <ul>
+                {[['Français','Natif'],['Anglais','Avancé'],['Espagnol','Élémentaire']].map(([lang, lvl]) => (
+                  <li key={lang} className="cv-lang-item">
+                    <span className="cv-lang-name">{lang}</span>{' '}
+                    <span className="cv-lang-level">{lvl}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
 
-            <div className="cv-sidebar-section">
-              <div className="cv-sidebar-title">Mobilité</div>
+            <section className="cv-sidebar-section">
+              <h2 className="cv-sidebar-title">Mobilité</h2>
               <p>Lyon · Remote · France</p>
               <p style={{ marginTop: 4 }}>Freelance ou CDI</p>
               <p style={{ marginTop: 4 }}>Véhiculé</p>
-            </div>
+            </section>
 
           </aside>
 
@@ -125,7 +129,7 @@ export default function CV() {
           <main className="cv-main">
 
             <section className="cv-profil">
-              <div className="cv-section-title">Profil</div>
+              <h2 className="cv-section-title">Profil</h2>
               <p>
                 Freelance IT (micro-entreprise, depuis 2023) avec une expertise confirmée en architecture
                 cloud AWS, CI/CD et développement fullstack. J'interviens de l'infrastructure au code
@@ -136,16 +140,16 @@ export default function CV() {
             </section>
 
             <section>
-              <div className="cv-section-title">Expérience professionnelle</div>
+              <h2 className="cv-section-title">Expérience professionnelle</h2>
 
               <div className="cv-exp">
                 <div className="cv-exp-header">
-                  <div className="cv-exp-title">DevOps AWS & Lead Développeur</div>
+                  <h3 className="cv-exp-title">DevOps AWS & Lead Développeur</h3>{' '}
                   <div className="cv-exp-period">2023 - 2025</div>
                 </div>
                 <div className="cv-exp-company">
-                  STEF IT <span className="cv-exp-via">via</span> VICINITY
-                  <span className="cv-exp-sep">·</span>
+                  STEF IT <span className="cv-exp-via">via</span> VICINITY{' '}
+                  <span className="cv-exp-sep">·</span>{' '}
                   <span className="cv-exp-type">Transport & Supply Chain · Freelance / ESN</span>
                 </div>
                 <p className="cv-exp-desc">
@@ -154,42 +158,34 @@ export default function CV() {
                   d'une architecture IoT d'alertes capteurs (IoT Core, LoRaWAN) et de CDK AWS.
                   Migration Jenkins vers GitLab CI.
                 </p>
-                <div className="cv-stack">
-                  {['Angular','NestJS','Node.js','AWS CDK','Lambda','EC2','DynamoDB','S3','RDS','SNS / SQS','Docker','GitLab','MySQL','MongoDB','Scrum'].map(t => (
-                    <span key={t} className="cv-stack-tag">{t}</span>
-                  ))}
-                </div>
+                <StackTags items={['Angular','NestJS','Node.js','AWS CDK','Lambda','EC2','DynamoDB','S3','RDS','SNS / SQS','Docker','GitLab','MySQL','MongoDB','Scrum']} />
               </div>
 
               <div className="cv-exp">
                 <div className="cv-exp-header">
-                  <div className="cv-exp-title">DevOps AWS & Développeur Full Stack</div>
+                  <h3 className="cv-exp-title">DevOps AWS & Développeur Full Stack</h3>{' '}
                   <div className="cv-exp-period">2022 - 2023</div>
                 </div>
                 <div className="cv-exp-company">
-                  SERFIM <span className="cv-exp-via">via</span> ACENSI
-                  <span className="cv-exp-sep">·</span>
+                  SERFIM <span className="cv-exp-via">via</span> ACENSI{' '}
+                  <span className="cv-exp-sep">·</span>{' '}
                   <span className="cv-exp-type">Travaux publics & Environnement · CDI / ESN</span>
                 </div>
                 <p className="cv-exp-desc">
                   Développement de plateformes Vue.js connectées à des architectures AWS IoT.
                   Création d'un CDK SSO, d'un module d'alertes LoRaWAN (SNS/SQS) et d'un back-office Cognito.
                 </p>
-                <div className="cv-stack">
-                  {['Vue.js','Node.js','AWS CDK','Lambda','Cognito','SNS / SQS','DynamoDB','Docker','GitLab','Scrum'].map(t => (
-                    <span key={t} className="cv-stack-tag">{t}</span>
-                  ))}
-                </div>
+                <StackTags items={['Vue.js','Node.js','AWS CDK','Lambda','Cognito','SNS / SQS','DynamoDB','Docker','GitLab','Scrum']} />
               </div>
 
               <div className="cv-exp">
                 <div className="cv-exp-header">
-                  <div className="cv-exp-title">DevOps AWS & Développeur Full Stack</div>
+                  <h3 className="cv-exp-title">DevOps AWS & Développeur Full Stack</h3>{' '}
                   <div className="cv-exp-period">2021 - 2022</div>
                 </div>
                 <div className="cv-exp-company">
-                  RISKEE / OLINO
-                  <span className="cv-exp-sep">·</span>
+                  RISKEE / OLINO{' '}
+                  <span className="cv-exp-sep">·</span>{' '}
                   <span className="cv-exp-type">Assurance digitale · Alternance Epitech</span>
                 </div>
                 <p className="cv-exp-desc">
@@ -197,24 +193,20 @@ export default function CV() {
                   avec mise en place du CI/CD, conteneurisation Docker et tests E2E.
                   Encadrement d'une équipe de 4 développeurs.
                 </p>
-                <div className="cv-stack">
-                  {['React.js','Node.js','AWS Lambda','S3','DynamoDB','IAM','Docker','GitLab','Prometheus','Grafana','MongoDB','PostgreSQL','Agile'].map(t => (
-                    <span key={t} className="cv-stack-tag">{t}</span>
-                  ))}
-                </div>
+                <StackTags items={['React.js','Node.js','AWS Lambda','S3','DynamoDB','IAM','Docker','GitLab','Prometheus','Grafana','MongoDB','PostgreSQL','Agile']} />
               </div>
             </section>
 
             <section style={{ marginTop: 32 }}>
-              <div className="cv-section-title">Formation</div>
+              <h2 className="cv-section-title">Formation</h2>
               <div className="cv-edu-grid">
                 <div>
-                  <div className="cv-edu-degree">Master of Science</div>
+                  <h3 className="cv-edu-degree">Master of Science</h3>
                   <div className="cv-edu-school">Epitech</div>
                   <div className="cv-edu-year">2019 - 2022 · Alternance</div>
                 </div>
                 <div>
-                  <div className="cv-edu-degree">DUT Informatique</div>
+                  <h3 className="cv-edu-degree">DUT Informatique</h3>
                   <div className="cv-edu-school">IUT2 Grenoble</div>
                   <div className="cv-edu-year">2017 - 2019</div>
                 </div>
@@ -223,7 +215,7 @@ export default function CV() {
 
           </main>
         </div>
-      </div>
+      </article>
     </div>
   )
 }

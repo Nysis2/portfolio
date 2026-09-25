@@ -1,5 +1,8 @@
 /* ── Reset CV ── */
 .cv-wrap * { box-sizing: border-box; margin: 0; padding: 0; }
+/* Balisage semantique (lisible par les bots) sans styles navigateur par defaut */
+.cv-wrap ul { list-style: none; }
+.cv-wrap address { font-style: normal; }
 
 /* ── Layout ── */
 .cv-wrap {

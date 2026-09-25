@@ -32,7 +32,7 @@ const escape = (str) =>
     .replace(/"/g, '&quot;')
 
 /** Construit les balises head specifiques a une route. */
-function headFor({ path: routePath, title, description }) {
+function headFor({ path: routePath, title, description, jsonLd }) {
   const url = SITE_URL + (routePath === '/' ? '/' : routePath)
   const t = escape(title)
   const d = escape(description)
@@ -52,7 +52,13 @@ function headFor({ path: routePath, title, description }) {
     `<meta name="twitter:title" content="${t}" />`,
     `<meta name="twitter:description" content="${d}" />`,
     `<meta name="twitter:image" content="${OG_IMAGE}" />`,
-  ].join('\n    ')
+    // Donnees structurees schema.org (Google, ATS, crawlers IA).
+    // `<` echappe pour ne jamais fermer la balise script.
+    jsonLd &&
+      `<script type="application/ld+json">${JSON.stringify(jsonLd).replace(/</g, '\\u003c')}</script>`,
+  ]
+    .filter(Boolean)
+    .join('\n    ')
 }
 
 const SEO_BLOCK = /<!--seo-->[\s\S]*?<!--\/seo-->/
@@ -71,10 +77,12 @@ for (const route of routes) {
     .replace(SEO_BLOCK, headFor(route))
     .replace(APP_HTML, appHtml)
 
+  // /cv -> dist/cv.html (et non cv/index.html) : Netlify sert /cv directement,
+  // sans redirection 301 vers /cv/ que certains bots ne suivent pas.
   const outFile =
     route.path === '/'
       ? path.join(dist, 'index.html')
-      : path.join(dist, route.path, 'index.html')
+      : path.join(dist, `${route.path}.html`)
 
   fs.mkdirSync(path.dirname(outFile), { recursive: true })
   fs.writeFileSync(outFile, html)
@@ -98,7 +106,7 @@ const redirects = [
   '# Genere par prerender.js - ne pas editer a la main',
   ...routes
     .filter((r) => r.path !== '/')
-    .map((r) => `${r.path}  ${r.path}/index.html  200`),
+    .map((r) => `${r.path}  ${r.path}.html  200`),
   '/*  /index.html  200',
 ].join('\n')
 
