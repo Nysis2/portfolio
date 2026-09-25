@@ -108,11 +108,6 @@ export default function Projects() {
           {projects.map((project, index) => (
             <ProjectCard key={project.id} project={project} index={index} />
           ))}
-
-          {/* Carte placeholder */}
-          <li className={`${styles.card} ${styles.cardPlaceholder}`}>
-            <span className={styles.placeholderLabel}>Bientôt...</span>
-          </li>
         </ul>
       </div>
     </section>

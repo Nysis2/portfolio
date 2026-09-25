@@ -187,25 +187,6 @@
   border-color: rgba(255, 255, 255, 0.25);
 }
 
-/* Carte placeholder : futur projet */
-.cardPlaceholder {
-  align-items: center;
-  justify-content: center;
-  min-height: 180px;
-  border-style: dashed;
-  background: transparent;
-}
-
-.cardPlaceholder:hover {
-  background: transparent;
-}
-
-.placeholderLabel {
-  font-size: 0.85rem;
-  color: var(--color-text-muted);
-  letter-spacing: 0.08em;
-}
-
 @media (max-width: 900px) {
   .section {
     padding: 80px 24px;
