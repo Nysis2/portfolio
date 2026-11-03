@@ -57,7 +57,7 @@ export default function CV() {
             <a href="tel:+33641911752">06 41 91 17 52</a>{' '}
             <a href="mailto:npandraud@gmail.com">npandraud@gmail.com</a>{' '}
             <a href="https://linkedin.com/in/nicolas-pandraud" target="_blank" rel="noopener noreferrer">linkedin.com/in/nicolas-pandraud</a>{' '}
-            <a href="https://nicolas-pandraud.netlify.app" target="_blank" rel="noopener noreferrer">nicolas-pandraud.netlify.app</a>
+            <a href="https://nicolas-pandraud.fr" target="_blank" rel="noopener noreferrer">nicolas-pandraud.fr</a>
           </address>
         </header>
 

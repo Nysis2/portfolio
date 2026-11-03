@@ -5,7 +5,7 @@
  */
 import { CREDLY_URL, CERT_NAME } from './data/certification.js'
 
-export const SITE_URL = 'https://nicolas-pandraud.netlify.app'
+export const SITE_URL = 'https://nicolas-pandraud.fr'
 
 /** Personne en donnees structurees schema.org (a garder aligne avec pages/CV.jsx). */
 const person = {
