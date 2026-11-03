@@ -146,6 +146,8 @@ console.log('404.html genere')
 // SPA, Netlify sert 404.html pour le reste.
 const redirects = [
   '# Genere par prerender.js - ne pas editer a la main',
+  // Ancienne adresse Netlify -> domaine principal (301 : Google transfere le referencement)
+  'https://nicolas-pandraud.netlify.app/*  https://nicolas-pandraud.fr/:splat  301!',
   ...routes
     .filter((r) => r.path !== '/')
     .map((r) => `${r.path}  ${r.path}.html  200`),
