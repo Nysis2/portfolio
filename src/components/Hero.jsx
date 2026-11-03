@@ -29,7 +29,7 @@ export default function Hero() {
         <span className={styles.badge}>DevOps spécialisé AWS · Lead Fullstack</span>
         <h1 className={styles.name}>Nicolas Pandraud</h1>
         <p className={styles.tagline}>
-          <strong>DevOps spécialisé AWS</strong>, certifié Solutions Architect Associate.<br />
+          <strong>DevOps spécialisé AWS</strong> freelance à Lyon, certifié Solutions Architect Associate.<br />
           J'architecte des infrastructures cloud fiables et scalables, de l'IoT au frontend.
         </p>
 

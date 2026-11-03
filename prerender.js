@@ -22,7 +22,9 @@ const template = fs.readFileSync(templatePath, 'utf-8')
 
 const { render, routes, SITE_URL } = await import(pathToFileURL(ssrEntry).href)
 
-const OG_IMAGE = `${SITE_URL}/aws-saa-badge.png`
+// Image d'apercu 1200x630 (LinkedIn, Slack, X...) - voir public/og-image.jpg
+const OG_IMAGE = `${SITE_URL}/og-image.jpg`
+const OG_IMAGE_ALT = 'Nicolas Pandraud - DevOps AWS freelance à Lyon & Lead Fullstack'
 
 const escape = (str) =>
   str
@@ -48,10 +50,18 @@ function headFor({ path: routePath, title, description, jsonLd }) {
     `<meta property="og:title" content="${t}" />`,
     `<meta property="og:description" content="${d}" />`,
     `<meta property="og:image" content="${OG_IMAGE}" />`,
+    `<meta property="og:image:width" content="1200" />`,
+    `<meta property="og:image:height" content="630" />`,
+    `<meta property="og:image:alt" content="${escape(OG_IMAGE_ALT)}" />`,
     `<meta name="twitter:card" content="summary_large_image" />`,
     `<meta name="twitter:title" content="${t}" />`,
     `<meta name="twitter:description" content="${d}" />`,
     `<meta name="twitter:image" content="${OG_IMAGE}" />`,
+    // Fond du hero : charge tot pour accelerer le premier affichage (accueil seulement)
+    routePath === '/' &&
+      `<link rel="preload" as="image" href="/bg.webp" media="(min-width: 641px)" fetchpriority="high" />`,
+    routePath === '/' &&
+      `<link rel="preload" as="image" href="/bg-mobile.webp" media="(max-width: 640px)" fetchpriority="high" />`,
     // Donnees structurees schema.org (Google, ATS, crawlers IA).
     // `<` echappe pour ne jamais fermer la balise script.
     jsonLd &&
@@ -89,25 +99,56 @@ for (const route of routes) {
   console.log(`pre-rendu ${route.path} -> ${path.relative(process.cwd(), outFile)}`)
 }
 
-// Sitemap genere depuis la meme source de routes
+// Sitemap genere depuis la meme source de routes (date = jour du build)
+const lastmod = new Date().toISOString().slice(0, 10)
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${routes
-  .map((r) => `  <url><loc>${SITE_URL}${r.path === '/' ? '/' : r.path}</loc></url>`)
+  .map(
+    (r) =>
+      `  <url><loc>${SITE_URL}${r.path === '/' ? '/' : r.path}</loc><lastmod>${lastmod}</lastmod></url>`
+  )
   .join('\n')}
 </urlset>
 `
 fs.writeFileSync(path.join(dist, 'sitemap.xml'), sitemap)
 console.log('sitemap.xml genere')
 
+// Page 404 statique : une URL inconnue renvoie un vrai code 404 (et non une
+// copie de l'accueil en 200, que Google traite comme du contenu duplique).
+const notFound = `<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Page introuvable - Nicolas Pandraud</title>
+    <style>
+      body { margin: 0; min-height: 100vh; display: grid; place-items: center;
+        background: #0a0a0a; color: #e5e5e5; font-family: Inter, system-ui, sans-serif; text-align: center; }
+      a { color: #fff; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Page introuvable</h1>
+      <p><a href="/">Retour au portfolio de Nicolas Pandraud</a></p>
+    </main>
+  </body>
+</html>
+`
+fs.writeFileSync(path.join(dist, '404.html'), notFound)
+console.log('404.html genere')
+
 // Regles Netlify generees depuis les routes : chaque route pointe explicitement
-// vers son HTML pre-rendu, le reste retombe sur l'index (fallback SPA).
+// vers son HTML pre-rendu. Toutes les pages sont pre-rendues : pas de fallback
+// SPA, Netlify sert 404.html pour le reste.
 const redirects = [
   '# Genere par prerender.js - ne pas editer a la main',
   ...routes
     .filter((r) => r.path !== '/')
     .map((r) => `${r.path}  ${r.path}.html  200`),
-  '/*  /index.html  200',
 ].join('\n')
 
 fs.writeFileSync(path.join(dist, '_redirects'), redirects + '\n')

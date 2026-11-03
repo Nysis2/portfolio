@@ -13,7 +13,7 @@
 .bg {
   position: absolute;
   inset: 0;
-  background-image: url('/bg.jpg');
+  background-image: url('/bg.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -190,6 +190,11 @@
 }
 
 @media (max-width: 640px) {
+  /* Fond plus léger sur mobile */
+  .bg {
+    background-image: url('/bg-mobile.webp');
+  }
+
   .content {
     gap: 18px;
     padding: 0 20px;
