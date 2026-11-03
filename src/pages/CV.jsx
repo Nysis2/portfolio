@@ -131,8 +131,8 @@ export default function CV() {
             <section className="cv-profil">
               <h2 className="cv-section-title">Profil</h2>
               <p>
-                Freelance IT (micro-entreprise, depuis 2023) avec une expertise confirmée en architecture
-                cloud AWS, CI/CD et développement fullstack. J'interviens de l'infrastructure au code
+                Freelance IT (micro-entreprise, depuis 2023), certifié AWS Solutions Architect Associate,
+                avec une expertise confirmée en architecture cloud AWS, CI/CD et développement fullstack. J'interviens de l'infrastructure au code
                 pour accélérer la mise en production et fiabiliser les systèmes. Expérience de lead
                 technique sur des équipes de 4 à 6 personnes, en contexte Agile.
                 Ouvert à des missions freelance ou à un poste en CDI, à Lyon ou en remote.
@@ -144,8 +144,27 @@ export default function CV() {
 
               <div className="cv-exp">
                 <div className="cv-exp-header">
+                  <h3 className="cv-exp-title">Fondateur & Développeur Full Stack</h3>{' '}
+                  <div className="cv-exp-period">2026 - aujourd'hui</div>
+                </div>
+                <div className="cv-exp-company">
+                  MYSTRIA{' '}
+                  <span className="cv-exp-sep">·</span>{' '}
+                  <span className="cv-exp-type">Plateforme SaaS de jeu de rôle en ligne · <a href="https://mystria.fr" target="_blank" rel="noopener noreferrer">mystria.fr</a></span>
+                </div>
+                <p className="cv-exp-desc">
+                  Conception et mise en production d'une plateforme SaaS temps réel en TypeScript : front React
+                  avec plateau 3D (Three.js), API Node.js/Express et WebSockets, paiements Stripe. CI/CD GitHub
+                  Actions multi-environnements (tests, audit de sécurité, déploiement continu). Pratique IA-first :
+                  agents IA (Claude Code) au cœur du workflow, de la conception à la revue de code.
+                </p>
+                <StackTags items={['React','TypeScript','Node.js','Express','Socket.io','Three.js','MongoDB','Stripe','GitHub Actions','Playwright','Claude Code']} />
+              </div>
+
+              <div className="cv-exp">
+                <div className="cv-exp-header">
                   <h3 className="cv-exp-title">DevOps AWS & Lead Développeur</h3>{' '}
-                  <div className="cv-exp-period">2023 - 2025</div>
+                  <div className="cv-exp-period">2023 - 2026</div>
                 </div>
                 <div className="cv-exp-company">
                   STEF IT <span className="cv-exp-via">via</span> VICINITY{' '}
@@ -181,7 +200,7 @@ export default function CV() {
               <div className="cv-exp">
                 <div className="cv-exp-header">
                   <h3 className="cv-exp-title">DevOps AWS & Développeur Full Stack</h3>{' '}
-                  <div className="cv-exp-period">2021 - 2022</div>
+                  <div className="cv-exp-period">2020 - 2022</div>
                 </div>
                 <div className="cv-exp-company">
                   RISKEE / OLINO{' '}

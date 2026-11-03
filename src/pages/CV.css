@@ -459,6 +459,48 @@
 }
 
 /* ── Print ── */
+/* ── Format A4 ──
+   Sur grand écran et à l'impression, la feuille a les proportions exactes
+   d'une A4 (923 x 1306 px = 210 x 297 mm a l'echelle du CV du 2 nov.) :
+   l'écran montre donc exactement ce que donnera le PDF. */
+@media print, (min-width: 1000px) {
+  .cv-page {
+    width: 923px;
+    max-width: none;
+    height: 1306px;
+    display: flex;
+    flex-direction: column;
+  }
+  /* La colonne de gauche descend jusqu'en bas de la feuille */
+  .cv-body { flex: 1; min-height: 0; }
+
+  /* Mise en page resserree pour tenir sur une page */
+  .cv-header    { padding: 18px 40px 16px; }
+  .cv-sidebar   { padding: 20px 20px; }
+  .cv-main      { padding: 20px 30px; }
+  .cv-profil    { margin-bottom: 12px; padding-bottom: 10px; }
+  .cv-exp       { margin-bottom: 12px; }
+  .cv-exp-desc  { margin-bottom: 8px; }
+  .cv-name      { font-size: 2rem; }
+  .cv-sidebar-section { margin-bottom: 14px; }
+  .cv-sidebar-title { margin-bottom: 8px; padding-bottom: 4px; }
+  .cv-sidebar p { line-height: 1.5; }
+  .cv-skill-group { margin-bottom: 6px; }
+  .cv-skill-tag { padding: 1px 7px; }
+  .cv-lang-item { margin-bottom: 5px; }
+  .cv-cert       { padding: 8px; gap: 4px; }
+  .cv-cert-logo  { width: 54px; height: 54px; }
+  /* Réduit la grosse marge inline de la section Formation */
+  .cv-main section[style] { margin-top: 10px !important; }
+}
+
+/* Ecran moyen : le bouton fixe en haut a droite mordrait sur la feuille A4,
+   on le pose au-dessus, aligne sur son bord droit. */
+@media (min-width: 1000px) and (max-width: 1440px) {
+  .cv-wrap { position: relative; padding-top: 84px; }
+  .cv-download { position: absolute; top: 28px; right: calc(50% - 461.5px); }
+}
+
 @media print {
   /* margin: 0 supprime les en-têtes/pieds Chrome sans plugin */
   @page { size: A4 portrait; margin: 0; }
@@ -481,30 +523,13 @@
 
   .cv-download { display: none !important; }
 
+  /* 923 x 1306 px ramenes a la taille A4 (794 x 1123 px a 96 dpi) */
   .cv-page {
     box-shadow: none !important;
     border-radius: 0 !important;
-    max-width: 100% !important;
-    width: 100% !important;
-    /* overflow:hidden couperait le contenu debordant sur une 2e page */
-    overflow: visible !important;
-    font-size: 86%;
+    zoom: 0.8593;
+    overflow: hidden;
   }
-
-  /* Ne pas couper une experience ou un bloc sidebar en deux pages */
-  .cv-exp,
-  .cv-sidebar-section,
-  .cv-skill-group,
-  .cv-edu-grid > div { break-inside: avoid; page-break-inside: avoid; }
-
-  /* Réduction du padding pour tenir sur une page */
-  .cv-header    { padding: 14px 36px 12px !important; }
-  .cv-sidebar   { padding: 16px 16px !important; }
-  .cv-main      { padding: 16px 26px !important; }
-  .cv-profil    { margin-bottom: 10px !important; padding-bottom: 8px !important; }
-  .cv-exp       { margin-bottom: 9px !important; }
-  .cv-exp-desc  { margin-bottom: 8px !important; }
-  .cv-name      { font-size: 1.8rem !important; }
 
   /* Le degrade en background-clip:text peut ne rien rendre a l'impression :
      on repasse le nom en couleur pleine. */
@@ -515,17 +540,4 @@
     -webkit-text-fill-color: #a78bfa !important;
     color: #a78bfa !important;
   }
-  .cv-sidebar-section { margin-bottom: 10px !important; }
-  .cv-sidebar-title { margin-bottom: 8px !important; padding-bottom: 4px !important; }
-  .cv-sidebar p { line-height: 1.5 !important; }
-  .cv-skill-group { margin-bottom: 6px !important; }
-  .cv-skill-tag { padding: 1px 7px !important; }
-  .cv-lang-item { margin-bottom: 5px !important; }
-
-  /* Certification compacte à l'impression */
-  .cv-cert       { padding: 8px !important; gap: 4px !important; }
-  .cv-cert-logo  { width: 54px !important; height: 54px !important; }
-
-  /* Réduit la grosse marge inline de la section Formation */
-  .cv-main section[style] { margin-top: 8px !important; }
 }

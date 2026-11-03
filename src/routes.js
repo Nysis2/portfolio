@@ -20,7 +20,7 @@ const cvJsonLd = {
     familyName: 'Pandraud',
     jobTitle: 'DevOps spécialisé AWS · Lead Développeur Fullstack',
     description:
-      "Freelance IT (micro-entreprise, depuis 2023) avec une expertise confirmée en architecture cloud AWS, CI/CD et développement fullstack. Expérience de lead technique sur des équipes de 4 à 6 personnes, en contexte Agile. Ouvert à des missions freelance ou à un poste en CDI, à Lyon ou en remote.",
+      "Freelance IT (micro-entreprise, depuis 2023), certifié AWS Solutions Architect Associate, avec une expertise confirmée en architecture cloud AWS, CI/CD et développement fullstack. Expérience de lead technique sur des équipes de 4 à 6 personnes, en contexte Agile. Ouvert à des missions freelance ou à un poste en CDI, à Lyon ou en remote.",
     email: 'mailto:npandraud@gmail.com',
     telephone: '+33641911752',
     url: SITE_URL,
@@ -39,7 +39,8 @@ const cvJsonLd = {
       'AWS', 'AWS CDK', 'Lambda', 'EC2', 'S3', 'DynamoDB', 'RDS', 'SQS', 'SNS',
       'IoT Core', 'Cognito', 'GitLab CI/CD', 'Docker', 'Angular', 'TypeScript',
       'Vue.js', 'React.js', 'Node.js', 'NestJS', 'REST API', 'MongoDB',
-      'PostgreSQL', 'MySQL', 'Scrum', 'Agile',
+      'PostgreSQL', 'MySQL', 'Express', 'Socket.io', 'Three.js', 'Stripe',
+      'GitHub Actions', 'Playwright', 'Scrum', 'Agile',
     ],
     hasCredential: {
       '@type': 'EducationalOccupationalCredential',
