@@ -116,28 +116,8 @@ console.log('sitemap.xml genere')
 
 // Page 404 statique : une URL inconnue renvoie un vrai code 404 (et non une
 // copie de l'accueil en 200, que Google traite comme du contenu duplique).
-const notFound = `<!doctype html>
-<html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="noindex" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>Page introuvable - Nicolas Pandraud</title>
-    <style>
-      body { margin: 0; min-height: 100vh; display: grid; place-items: center;
-        background: #0a0a0a; color: #e5e5e5; font-family: Inter, system-ui, sans-serif; text-align: center; }
-      a { color: #fff; }
-    </style>
-  </head>
-  <body>
-    <main>
-      <h1>Page introuvable</h1>
-      <p><a href="/">Retour au portfolio de Nicolas Pandraud</a></p>
-    </main>
-  </body>
-</html>
-`
+// Le gabarit vit dans src/pages/404.html (styles autonomes, copie telle quelle).
+const notFound = fs.readFileSync(path.resolve('src/pages/404.html'), 'utf-8')
 fs.writeFileSync(path.join(dist, '404.html'), notFound)
 console.log('404.html genere')
 
